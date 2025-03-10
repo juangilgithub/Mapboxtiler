@@ -34,7 +34,7 @@
     padding: 10px; /* Espaciado interno */
     background-color: rgba(0, 0, 0, 0.7); /* Fondo negro semi-transparente */
     border-radius: 5px; /* Bordes redondeados */
-    display: none;
+    display: flex;
     flex-direction: column; /* Apila los elementos verticalmente */
     align-items: center; /* Centra los elementos horizontalmente */
     gap: 5px; /* Espacio entre el botón y el slider */
@@ -251,6 +251,9 @@
     <li id="wind" class="btn btn-primary button">Wind</li>
    </ul>
 
+   <div id="play-container">
+    <button id="play-pause-bt" class="button">Play</button>
+</div>
 
 
 
@@ -316,7 +319,7 @@
       appContainer.appendChild(markerContainer);
     
 
-      const initWeatherLayer = "pressure";
+      const initWeatherLayer = "precipitation";
 
       // const initialDate = new Date(Date.UTC(2025, 2, 5, 12, 0, 0)); // Marzo es el mes 2 porque los meses van de 0 a 11
       // const initialTimestamp = initialDate.getTime() / 1000; 
@@ -405,34 +408,12 @@
         fastColor: [255, 255, 255, 100],
         });
 		
-  
+      map.addLayer(windLayer);
 
       map.on('load', function () {
         map.setPaintProperty("Water", 'fill-color', "rgba(0, 0, 0, 0.4)");
 		 // playPauseButton.innerText = "Pause";
         initWeatherMap(initWeatherLayer);
-
-   
-
-      map.addSource('contours', {
-            type: 'vector',
-            url:
-            'https://api.maptiler.com/tiles/contours-v2/tiles.json?key=BMRZ94nyuUi40edFPorX'
-        });
-        map.addLayer({
-            'id': 'terrain-data',
-            'type': 'line',
-            'source': 'contours',
-            'source-layer': 'contour',
-            'layout': {
-                'line-join': 'round',
-                'line-cap': 'round'
-            },
-            'paint': {
-                'line-color': '#ff69b4',
-                'line-width': 1
-            }
-        });
 	
 
       });
@@ -584,6 +565,7 @@
 
       function createWeatherLayer(type){
         let weatherLayer = null;
+	      
         switch (type) {
 			
 			case 'precipitation':
@@ -648,8 +630,10 @@
         // From now on, the layer nows the start and end dates.
         weatherLayer.on("sourceReady", event => {
 
-          windLayer.animateByFactor(1600);
-          map.addLayer(windLayer);
+
+		
+           windLayer.animateByFactor(1600);
+          
           
           const startDate = weatherLayer.getAnimationStartDate();
           const endDate = weatherLayer.getAnimationEndDate();
@@ -824,9 +808,6 @@ minLabel.style.fontWeight = "bold";
 }
 
 
-
-
-
         onRemove() {
           if (!this._map || !this._container) {
             return;
@@ -844,7 +825,3 @@ minLabel.style.fontWeight = "bold";
   </script>
 </body>
 </html>
-
-
-
-
