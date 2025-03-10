@@ -34,7 +34,7 @@
     padding: 10px; /* Espaciado interno */
     background-color: rgba(0, 0, 0, 0.7); /* Fondo negro semi-transparente */
     border-radius: 5px; /* Bordes redondeados */
-    display: none;
+    display: flex;
     flex-direction: column; /* Apila los elementos verticalmente */
     align-items: center; /* Centra los elementos horizontalmente */
     gap: 5px; /* Espacio entre el botón y el slider */
@@ -62,7 +62,7 @@
 }
 
 #time-slider {
-    width: 2000px; /* Ancho del control deslizante */
+    width: 200px; /* Ancho del control deslizante */
     filter: drop-shadow(0 0 7px rgba(0, 0, 0, 0.7));
 }
 
@@ -319,7 +319,7 @@
       appContainer.appendChild(markerContainer);
     
 
-      const initWeatherLayer = "pressure";
+      const initWeatherLayer = "precipitation";
 
       // const initialDate = new Date(Date.UTC(2025, 2, 5, 12, 0, 0)); // Marzo es el mes 2 porque los meses van de 0 a 11
       // const initialTimestamp = initialDate.getTime() / 1000; 
@@ -497,11 +497,11 @@
         }
 
         // Mostrar el valor con las unidades correctas
-        pointerDataDiv.innerText = ${displayValue} ${weatherLayerUnits};
+        pointerDataDiv.innerText = `${displayValue} ${weatherLayerUnits}`;
        
         if (activeLayer === "wind") {
-          pointerDataDiv.innerHTML = <div id="arrow" style="transform: rotate(${value.directionAngle}deg);">↑</div>
-          ${value.compassDirection} ${value.speedKilometersPerHour.toFixed(1)} km/h;
+          pointerDataDiv.innerHTML = `<div id="arrow" style="transform: rotate(${value.directionAngle}deg);">↑</div>
+          ${value.compassDirection} ${value.speedKilometersPerHour.toFixed(1)} km/h`;
         }
 
 
@@ -798,14 +798,14 @@ function changeLayerLabel(type) {
 
  // Crear la etiqueta máxima (arriba)
 const maxLabel = document.createElement("span");
-maxLabel.textContent = ${bounds.max} ${this._options.units}; // Unidades dinámicas
+maxLabel.textContent = `${bounds.max} ${this._options.units}`; // Unidades dinámicas
 maxLabel.style.fontSize = "10px";
 maxLabel.style.color = "white";
 maxLabel.style.fontWeight = "bold";
 
 // Crear la etiqueta mínima (abajo)
 const minLabel = document.createElement("span");
-minLabel.textContent = ${bounds.min} ${this._options.units}; // Unidades dinámicas
+minLabel.textContent = `${bounds.min} ${this._options.units}`; // Unidades dinámicas
 minLabel.style.fontSize = "10px";
 minLabel.style.color = "white";
 minLabel.style.fontWeight = "bold";
@@ -819,6 +819,10 @@ minLabel.style.fontWeight = "bold";
     this._container.appendChild(wrapper);
     return this._container;
 }
+
+
+
+
 
         onRemove() {
           if (!this._map || !this._container) {
@@ -837,3 +841,5 @@ minLabel.style.fontWeight = "bold";
   </script>
 </body>
 </html>
+
+
