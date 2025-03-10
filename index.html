@@ -34,7 +34,7 @@
     padding: 10px; /* Espaciado interno */
     background-color: rgba(0, 0, 0, 0.7); /* Fondo negro semi-transparente */
     border-radius: 5px; /* Bordes redondeados */
-    display: none;
+    display: flex;
     flex-direction: column; /* Apila los elementos verticalmente */
     align-items: center; /* Centra los elementos horizontalmente */
     gap: 5px; /* Espacio entre el botón y el slider */
@@ -244,13 +244,16 @@
 
   </div>
   <ul id="buttons">
-
+	<li id="precipitation" class="btn btn-primary button">Precipitation</li>
+    <li id="radar" class="btn btn-primary button">Radar</li>
     <li id="pressure" class="btn btn-primary button">Pressure</li>
     <li id="temperature" class="btn btn-primary button">Temperature</li>
     <li id="wind" class="btn btn-primary button">Wind</li>
    </ul>
 
-
+   <div id="play-container">
+    <button id="play-pause-bt" class="button">Play</button>
+</div>
 
 
 
@@ -316,7 +319,7 @@
       appContainer.appendChild(markerContainer);
     
 
-      const initWeatherLayer = "pressure";
+      const initWeatherLayer = "precipitation";
 
       // const initialDate = new Date(Date.UTC(2025, 2, 5, 12, 0, 0)); // Marzo es el mes 2 porque los meses van de 0 a 11
       // const initialTimestamp = initialDate.getTime() / 1000; 
@@ -411,6 +414,8 @@
         map.setPaintProperty("Water", 'fill-color', "rgba(0, 0, 0, 0.4)");
 		 // playPauseButton.innerText = "Pause";
         initWeatherMap(initWeatherLayer);
+
+   
 
       map.addSource('contours', {
             type: 'vector',
@@ -536,10 +541,10 @@
   
             map.addLayer(weatherLayer, 'Water');
 
+
 			// Aqui anado el viento en todas las capas
 			
-        windLayer.animateByFactor(1600);
-        map.addLayer(windLayer);
+     
 
           }
           changeLayerLabel(activeLayer);
@@ -645,6 +650,10 @@
         // Event called when all the datasource for the next days are added and ready.
         // From now on, the layer nows the start and end dates.
         weatherLayer.on("sourceReady", event => {
+
+          windLayer.animateByFactor(1600);
+          map.addLayer(windLayer);
+          
           const startDate = weatherLayer.getAnimationStartDate();
           const endDate = weatherLayer.getAnimationEndDate();
           if (timeSlider.min > 0){
@@ -838,5 +847,7 @@ minLabel.style.fontWeight = "bold";
   </script>
 </body>
 </html>
+
+
 
 
