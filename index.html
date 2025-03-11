@@ -244,7 +244,8 @@
 
   </div>
   <ul id="buttons">
-
+	<li id="precipitation" class="btn btn-primary button">Precipitation</li>
+    <li id="radar" class="btn btn-primary button">Radar</li>
     <li id="pressure" class="btn btn-primary button">Pressure</li>
     <li id="temperature" class="btn btn-primary button">Temperature</li>
     <li id="wind" class="btn btn-primary button">Wind</li>
@@ -318,7 +319,7 @@
       appContainer.appendChild(markerContainer);
     
 
-      const initWeatherLayer = "pressure";
+      const initWeatherLayer = "precipitation";
 
       // const initialDate = new Date(Date.UTC(2025, 2, 5, 12, 0, 0)); // Marzo es el mes 2 porque los meses van de 0 a 11
       // const initialTimestamp = initialDate.getTime() / 1000; 
@@ -411,56 +412,8 @@
 
       map.on('load', function () {
         map.setPaintProperty("Water", 'fill-color', "rgba(0, 0, 0, 0.4)");
-	
-         initWeatherMap(initWeatherLayer);
-
-    // // Agregar una fuente de teselas rasterizadas
-    // map.addSource('raster-tiles', {
-    //     type: 'raster',
-    //     tiles: [
-    //         'https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=BMRZ94nyuUi40edFPorX', // URL de teselas de MapTiler Satellite
-    //     ],
-    //     tileSize: 256, // Tamaño de las teselas
-    // });
-
-    // // Agregar la capa de imágenes rasterizadas
-    // map.addLayer({
-    //     id: 'raster-layer', // ID de la capa
-    //     type: 'raster', // Tipo de capa
-    //     source: 'raster-tiles', // Fuente de teselas
-    //     layout: {
-    //         visibility: 'visible', // Visibilidad de la capa
-    //     },
-    //     paint: {
-    //         'raster-opacity': 0.5, // Opacidad de la capa (0 a 1)
-    //     },
-    // });
-
-    // // Opcional: Agregar un control de capas para alternar entre el raster y el mapa base
-    // const layerList = document.getElementById('layer-list');
-    // const layers = [
-    //     { id: 'raster-layer', label: 'Satellite Imagery' },
-    //     { id: 'base-layer', label: 'Base Map' },
-    // ];
-
-    // layers.forEach((layer) => {
-    //     const button = document.createElement('button');
-    //     button.textContent = layer.label;
-    //     button.addEventListener('click', () => {
-    //         if (layer.id === 'raster-layer') {
-    //             map.setLayoutProperty('raster-layer', 'visibility', 'visible');
-    //             map.setLayoutProperty('base-layer', 'visibility', 'none');
-    //         } else {
-    //             map.setLayoutProperty('raster-layer', 'visibility', 'none');
-    //             map.setLayoutProperty('base-layer', 'visibility', 'visible');
-    //         }
-    //     });
-    //     layerList.appendChild(button);
-    // });
-
-   
-
-
+		 // playPauseButton.innerText = "Pause";
+        initWeatherMap(initWeatherLayer);
 
       });
 
@@ -875,6 +828,8 @@ minLabel.style.fontWeight = "bold";
   </script>
 </body>
 </html>
+
+
 
 
 
