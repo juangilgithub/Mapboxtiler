@@ -442,6 +442,27 @@
         isPlaying = !isPlaying;
       });
 
+	function playFromiOS() {
+        const weatherLayer = weatherLayers[activeLayer]?.layer;
+        if (isPlaying) {
+          weatherLayer.animateByFactor(0);
+          windLayer.animateByFactor(0);
+          playPauseButton.innerText = "Play";
+         
+        } else {
+          weatherLayer.animateByFactor(1600);
+          windLayer.animateByFactor(1600);
+          playPauseButton.innerText = "Pause";
+         
+         // labelsButton.disabled = true;
+        }
+        isPlaying = !isPlaying;
+      });
+
+
+
+
+	  
       function dBZtoRainRate(dBZ) {
       let Z = Math.pow(10, dBZ / 10);  // Convertimos dBZ a Z
       let R = Math.pow(Z / 200, 1 / 1.6);  // Aplicamos la ecuación Z-R para lluvia general
